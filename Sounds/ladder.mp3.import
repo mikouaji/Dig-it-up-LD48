@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ladder.mp3-4dc7eb3af8a96c18145e48dca2bf000d.mp3str"
+
+[deps]
+
+source_file="res://Sounds/ladder.mp3"
+dest_files=[ "res://.import/ladder.mp3-4dc7eb3af8a96c18145e48dca2bf000d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

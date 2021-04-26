@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shovel.mp3-ef14e0cfa6b0ea67a4aa3673baefc88a.mp3str"
+
+[deps]
+
+source_file="res://Sounds/shovel.mp3"
+dest_files=[ "res://.import/shovel.mp3-ef14e0cfa6b0ea67a4aa3673baefc88a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

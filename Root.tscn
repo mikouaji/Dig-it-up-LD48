@@ -1,0 +1,1198 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Root.gd" type="Script" id=1]
+[ext_resource path="res://gui-bg.png" type="Texture" id=2]
+[ext_resource path="res://GUI/font-20.tres" type="DynamicFont" id=3]
+[ext_resource path="res://GUI/tools_1.png" type="Texture" id=4]
+[ext_resource path="res://GUI/tools_2-2.png" type="Texture" id=5]
+[ext_resource path="res://GUI/tools_3-2.png" type="Texture" id=6]
+[ext_resource path="res://GUI/tools_4-2.png" type="Texture" id=7]
+[ext_resource path="res://GUI/tools_3_active-2.png" type="Texture" id=8]
+[ext_resource path="res://GUI/tools_3_disabled-2.png" type="Texture" id=9]
+[ext_resource path="res://GUI/tools_2_disabled-2.png" type="Texture" id=10]
+[ext_resource path="res://GUI/tools_2_active-2.png" type="Texture" id=11]
+[ext_resource path="res://GUI/splash.png" type="Texture" id=12]
+[ext_resource path="res://Item/items_1.png" type="Texture" id=13]
+[ext_resource path="res://SFX.gd" type="Script" id=14]
+[ext_resource path="res://GUI/shovel-broken-4.png" type="Texture" id=15]
+[ext_resource path="res://Sounds/BeepBox-Song.mp3" type="AudioStream" id=16]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://TT_E.otf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.415686, 0.745098, 0.188235, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.411765, 0.415686, 0.415686, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.196078, 0.235294, 0.223529, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.196078, 0.235294, 0.223529, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.34902, 0.337255, 0.321569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.411765, 0.415686, 0.415686, 1 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://TT_E.otf"
+
+[sub_resource type="DynamicFont" id=9]
+font_data = SubResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.411765, 0.415686, 0.415686, 1 )
+
+[node name="Root" type="Node"]
+script = ExtResource( 1 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.270588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game" type="VBoxContainer" parent="GUI"]
+anchor_bottom = 1.0
+margin_right = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="GUI/Game"]
+margin_right = 192.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "Dig it out!"
+align = 1
+valign = 1
+
+[node name="LevelLabel" type="Label" parent="GUI/Game"]
+margin_top = 29.0
+margin_right = 192.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 3 )
+text = "Level:"
+align = 1
+valign = 1
+
+[node name="LevelValue" type="Label" parent="GUI/Game"]
+margin_top = 51.0
+margin_right = 192.0
+margin_bottom = 69.0
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Game"]
+margin_top = 73.0
+margin_right = 192.0
+margin_bottom = 91.0
+alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="GUI/Game/HBoxContainer"]
+margin_left = 58.0
+margin_right = 74.0
+margin_bottom = 18.0
+size_flags_horizontal = 4
+texture = ExtResource( 4 )
+
+[node name="LevelValue2" type="Label" parent="GUI/Game/HBoxContainer"]
+margin_left = 78.0
+margin_right = 133.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "Gold:"
+align = 1
+valign = 1
+
+[node name="GoldValue" type="Label" parent="GUI/Game"]
+margin_top = 95.0
+margin_right = 192.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="TimedLabel" type="Label" parent="GUI/Game"]
+visible = false
+margin_top = 115.0
+margin_right = 192.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 3 )
+text = "Days left:"
+align = 1
+valign = 1
+
+[node name="TimedValue" type="Label" parent="GUI/Game"]
+visible = false
+margin_top = 115.0
+margin_right = 192.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 3 )
+text = "100"
+align = 1
+valign = 1
+
+[node name="DaysLabel" type="Label" parent="GUI/Game"]
+margin_top = 117.0
+margin_right = 192.0
+margin_bottom = 135.0
+custom_fonts/font = ExtResource( 3 )
+text = "Day:"
+align = 1
+valign = 1
+
+[node name="DaysValue" type="Label" parent="GUI/Game"]
+margin_top = 139.0
+margin_right = 192.0
+margin_bottom = 157.0
+custom_fonts/font = ExtResource( 3 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="ToolsLabel" type="Label" parent="GUI/Game"]
+margin_top = 161.0
+margin_right = 192.0
+margin_bottom = 179.0
+custom_fonts/font = ExtResource( 3 )
+text = "Tools:"
+align = 1
+valign = 1
+
+[node name="Shovel" type="HBoxContainer" parent="GUI/Game"]
+margin_top = 183.0
+margin_right = 192.0
+margin_bottom = 215.0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Game/Shovel"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 5 )
+
+[node name="Button" type="TextureButton" parent="GUI/Game/Shovel"]
+visible = false
+margin_left = 4.0
+margin_right = 36.0
+margin_bottom = 32.0
+focus_mode = 0
+toggle_mode = true
+pressed = true
+enabled_focus_mode = 0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 10 )
+
+[node name="ProgressBar" type="ProgressBar" parent="GUI/Game/Shovel"]
+margin_left = 36.0
+margin_right = 192.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+value = 55.0
+
+[node name="Pickaxe" type="HBoxContainer" parent="GUI/Game"]
+visible = false
+margin_top = 217.0
+margin_right = 192.0
+margin_bottom = 249.0
+alignment = 1
+
+[node name="Button" type="TextureButton" parent="GUI/Game/Pickaxe"]
+margin_right = 32.0
+margin_bottom = 32.0
+focus_mode = 0
+disabled = true
+toggle_mode = true
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 9 )
+
+[node name="ProgressBar" type="ProgressBar" parent="GUI/Game/Pickaxe"]
+margin_left = 36.0
+margin_right = 192.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+value = 55.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rope" type="HBoxContainer" parent="GUI/Game"]
+margin_top = 219.0
+margin_right = 192.0
+margin_bottom = 251.0
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="GUI/Game/Rope"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+
+[node name="Button" type="Button" parent="GUI/Game/Rope"]
+margin_left = 36.0
+margin_right = 192.0
+margin_bottom = 32.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+enabled_focus_mode = 0
+text = "Use rope"
+
+[node name="MenuLabel" type="Label" parent="GUI/Game"]
+margin_top = 255.0
+margin_right = 192.0
+margin_bottom = 273.0
+custom_fonts/font = ExtResource( 3 )
+text = "Menu:"
+align = 1
+valign = 1
+
+[node name="ToggleSound" type="Button" parent="GUI/Game"]
+margin_top = 277.0
+margin_right = 192.0
+margin_bottom = 295.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Turn sound off"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToggleMusic" type="Button" parent="GUI/Game"]
+margin_top = 299.0
+margin_right = 192.0
+margin_bottom = 317.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Turn music off"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Button" parent="GUI/Game"]
+margin_top = 321.0
+margin_right = 192.0
+margin_bottom = 339.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Quit to menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="GUI/Game"]
+margin_top = 343.0
+margin_right = 192.0
+margin_bottom = 361.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Quit game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" type="TextureRect" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="CenterContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Main"]
+margin_left = 403.0
+margin_top = 331.0
+margin_right = 556.0
+margin_bottom = 437.0
+
+[node name="FreePlay" type="Button" parent="GUI/Main/VBoxContainer"]
+margin_right = 153.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Free play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DaysPlay" type="Button" parent="GUI/Main/VBoxContainer"]
+margin_top = 22.0
+margin_right = 153.125
+margin_bottom = 40.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Challenge mode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instructions" type="Button" parent="GUI/Main/VBoxContainer"]
+margin_top = 44.0
+margin_right = 153.0
+margin_bottom = 62.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Instructions"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="GUI/Main/VBoxContainer"]
+margin_top = 66.0
+margin_right = 153.0
+margin_bottom = 84.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="GUI/Main/VBoxContainer"]
+margin_top = 88.0
+margin_right = 153.0
+margin_bottom = 106.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instructions" type="PanelContainer" parent="GUI/Main"]
+visible = false
+margin_left = 480.0
+margin_top = 384.0
+margin_right = 480.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Main/Instructions"]
+margin_right = 531.0
+margin_bottom = 359.0
+
+[node name="Label" type="Label" parent="GUI/Main/Instructions/VBoxContainer"]
+margin_right = 531.0
+margin_bottom = 337.0
+custom_fonts/font = SubResource( 9 )
+text = "
+Move around using arrow keys or WASD.
+Use the mouse cursor to use your tools (left mouse button).
+
+You can buy upgrades in the store on the surface (level 0).
+
+Watch out! Don't break your shovel!
+
+Every treasure collected equals one day.
+
+Free play 
+lets you play as long as you want 
+(or as long as the game doesnt crash).
+
+In Challenge mode 
+you have to accumulate 1 million gold (1 000 000)
+before 100 days pass.
+(Money spent on upgrades doesn't count)
+
+Have fun :)"
+align = 1
+
+[node name="Back" type="Button" parent="GUI/Main/Instructions/VBoxContainer"]
+margin_left = 487.25
+margin_top = 341.0
+margin_right = 531.0
+margin_bottom = 359.0
+focus_mode = 0
+size_flags_horizontal = 8
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="PanelContainer" parent="GUI/Main"]
+visible = false
+margin_left = 480.0
+margin_top = 384.0
+margin_right = 480.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Main/Credits"]
+margin_right = 414.0
+margin_bottom = 308.0
+
+[node name="Label" type="Label" parent="GUI/Main/Credits/VBoxContainer"]
+margin_right = 414.0
+margin_bottom = 286.0
+custom_fonts/font = SubResource( 9 )
+text = "
+Made by mikouaji
+https://mikouaji.itch.io
+
+Engine:
+Godot Engine 3.3
+
+Graphics:
+Pixelorama
+Krita
+
+Font:
+https://fontlibrary.org/en/font/tt2020-style-e
+
+Sound:
+sfxr
+https://www.beepbox.co/"
+align = 1
+
+[node name="Back" type="Button" parent="GUI/Main/Credits/VBoxContainer"]
+margin_left = 370.25
+margin_top = 290.0
+margin_right = 414.0
+margin_bottom = 308.0
+focus_mode = 0
+size_flags_horizontal = 8
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InGameGUI" type="CanvasLayer" parent="."]
+
+[node name="Chest" type="CenterContainer" parent="InGameGUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameGUI/Chest"]
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 384.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameGUI/Chest/PanelContainer"]
+margin_right = 207.0
+margin_bottom = 168.0
+alignment = 1
+
+[node name="Label" type="Label" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_right = 207.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "Congratulations!"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 207.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 9 )
+text = "You have found a chest!"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_left = 71.0
+margin_top = 40.0
+margin_right = 135.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+texture = ExtResource( 13 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 207.0
+margin_bottom = 124.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Chest/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 89.0
+margin_right = 105.0
+margin_bottom = 16.0
+texture = ExtResource( 4 )
+
+[node name="Gold" type="Label" parent="InGameGUI/Chest/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 109.0
+margin_top = 1.0
+margin_right = 118.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Collect" type="Button" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 207.0
+margin_bottom = 146.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Collect gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="InGameGUI/Chest/PanelContainer/VBoxContainer"]
+margin_top = 150.0
+margin_right = 207.0
+margin_bottom = 168.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Countinue digging"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timed" type="CenterContainer" parent="InGameGUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameGUI/Timed"]
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 384.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameGUI/Timed/PanelContainer"]
+margin_right = 135.0
+margin_bottom = 140.0
+alignment = 1
+
+[node name="Lose" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_right = 135.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "You lose :("
+align = 1
+valign = 1
+
+[node name="Win" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 135.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 3 )
+text = "You win!"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 135.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 9 )
+text = "You accumulated"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 62.0
+margin_right = 135.0
+margin_bottom = 78.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Timed/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 69.0
+margin_bottom = 16.0
+texture = ExtResource( 4 )
+
+[node name="Gold" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 73.0
+margin_top = 1.0
+margin_right = 82.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 135.0
+margin_bottom = 96.0
+alignment = 1
+
+[node name="Label3" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 9.0
+margin_right = 27.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "in"
+align = 1
+
+[node name="Days" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 31.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Label4" type="Label" parent="InGameGUI/Timed/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 44.0
+margin_right = 125.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "/100 days"
+align = 1
+
+[node name="MainMenu" type="Button" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 100.0
+margin_right = 135.0
+margin_bottom = 118.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="InGameGUI/Timed/PanelContainer/VBoxContainer"]
+margin_top = 122.0
+margin_right = 135.0
+margin_bottom = 140.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Quit game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shovel" type="CenterContainer" parent="InGameGUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameGUI/Shovel"]
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 384.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameGUI/Shovel/PanelContainer"]
+margin_right = 377.0
+margin_bottom = 186.0
+alignment = 1
+
+[node name="Label" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_right = 377.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "You lose :("
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 377.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 9 )
+text = "Your shovel is broken"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_left = 156.0
+margin_top = 40.0
+margin_right = 220.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+texture = ExtResource( 15 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 377.0
+margin_bottom = 122.0
+alignment = 1
+
+[node name="Label3" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 180.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "You were digging for"
+align = 1
+
+[node name="Days" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 184.0
+margin_right = 193.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Label4" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 197.0
+margin_right = 377.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 9 )
+text = "days and accumulated"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_top = 126.0
+margin_right = 377.0
+margin_bottom = 142.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 174.0
+margin_right = 190.0
+margin_bottom = 16.0
+texture = ExtResource( 4 )
+
+[node name="Gold" type="Label" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 194.0
+margin_top = 1.0
+margin_right = 203.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="MainMenu" type="Button" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_top = 146.0
+margin_right = 377.0
+margin_bottom = 164.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="InGameGUI/Shovel/PanelContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 377.0
+margin_bottom = 186.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Quit game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shop" type="CenterContainer" parent="InGameGUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameGUI/Shop"]
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 384.0
+margin_bottom = 384.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameGUI/Shop/PanelContainer"]
+margin_right = 331.0
+margin_bottom = 184.0
+alignment = 1
+
+[node name="Label" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_right = 331.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "Workshop"
+align = 1
+valign = 1
+
+[node name="Rope" type="HBoxContainer" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 331.0
+margin_bottom = 54.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Rope"]
+margin_left = 71.0
+margin_right = 103.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Rope"]
+margin_left = 107.0
+margin_top = 9.0
+margin_right = 224.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "Rope 150 gold"
+align = 1
+
+[node name="Buy" type="Button" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Rope"]
+margin_left = 228.0
+margin_right = 260.812
+margin_bottom = 32.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Buy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fix" type="HBoxContainer" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_top = 58.0
+margin_right = 331.0
+margin_bottom = 90.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix"]
+margin_left = 58.0
+margin_right = 90.0
+margin_bottom = 32.0
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix"]
+margin_left = 94.0
+margin_top = 9.0
+margin_right = 184.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "Fix shovel"
+align = 1
+
+[node name="Price" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix"]
+margin_left = 188.0
+margin_top = 9.0
+margin_right = 197.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Label2" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix"]
+margin_left = 201.0
+margin_top = 9.0
+margin_right = 237.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "gold"
+align = 1
+
+[node name="Buy" type="Button" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix"]
+margin_left = 241.0
+margin_right = 273.812
+margin_bottom = 32.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Fix"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Upgrade" type="HBoxContainer" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_top = 94.0
+margin_right = 331.0
+margin_bottom = 126.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 198.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "Upgrade durability"
+align = 1
+
+[node name="Price" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade"]
+margin_left = 202.0
+margin_top = 9.0
+margin_right = 211.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Label3" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade"]
+margin_left = 215.0
+margin_top = 9.0
+margin_right = 251.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "gold"
+align = 1
+
+[node name="Buy" type="Button" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade"]
+margin_left = 255.0
+margin_right = 331.562
+margin_bottom = 32.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Upgrade"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Range" type="HBoxContainer" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_top = 130.0
+margin_right = 331.0
+margin_bottom = 162.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Range"]
+margin_left = 22.0
+margin_right = 54.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Range"]
+margin_left = 58.0
+margin_top = 9.0
+margin_right = 175.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "Upgrade range"
+align = 1
+
+[node name="Price" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Range"]
+margin_left = 179.0
+margin_top = 9.0
+margin_right = 188.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+align = 1
+
+[node name="Label3" type="Label" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Range"]
+margin_left = 192.0
+margin_top = 9.0
+margin_right = 228.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+text = "gold"
+align = 1
+
+[node name="Buy" type="Button" parent="InGameGUI/Shop/PanelContainer/VBoxContainer/Range"]
+margin_left = 232.0
+margin_right = 308.562
+margin_bottom = 32.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Upgrade"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="InGameGUI/Shop/PanelContainer/VBoxContainer"]
+margin_top = 166.0
+margin_right = 331.0
+margin_bottom = 184.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+script = ExtResource( 14 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -5.0
+
+[connection signal="pressed" from="GUI/Game/Rope/Button" to="." method="_on_RopeButton_pressed"]
+[connection signal="pressed" from="GUI/Game/ToggleSound" to="SFX" method="_on_ToggleSound_pressed"]
+[connection signal="pressed" from="GUI/Game/ToggleSound" to="." method="_on_ToggleSound_pressed"]
+[connection signal="pressed" from="GUI/Game/ToggleMusic" to="." method="_on_ToggleMusic_pressed"]
+[connection signal="pressed" from="GUI/Game/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="GUI/Game/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="GUI/Main/VBoxContainer/FreePlay" to="." method="_on_FreePlay_pressed"]
+[connection signal="pressed" from="GUI/Main/VBoxContainer/DaysPlay" to="." method="_on_DaysPlay_pressed"]
+[connection signal="pressed" from="GUI/Main/VBoxContainer/Instructions" to="." method="_on_Instructions_pressed"]
+[connection signal="pressed" from="GUI/Main/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="GUI/Main/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="GUI/Main/Instructions/VBoxContainer/Back" to="." method="_on_InstructionsBack_pressed"]
+[connection signal="pressed" from="GUI/Main/Credits/VBoxContainer/Back" to="." method="_on_CreditsBack_pressed"]
+[connection signal="pressed" from="InGameGUI/Chest/PanelContainer/VBoxContainer/Collect" to="." method="_on_ChestCollect_pressed"]
+[connection signal="pressed" from="InGameGUI/Chest/PanelContainer/VBoxContainer/Continue" to="." method="_on_ChestContinue_pressed"]
+[connection signal="pressed" from="InGameGUI/Timed/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="InGameGUI/Timed/PanelContainer/VBoxContainer/Exit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="InGameGUI/Shovel/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="InGameGUI/Shovel/PanelContainer/VBoxContainer/Exit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="InGameGUI/Shop/PanelContainer/VBoxContainer/Rope/Buy" to="." method="_on_RopeBuy_pressed"]
+[connection signal="pressed" from="InGameGUI/Shop/PanelContainer/VBoxContainer/Fix/Buy" to="." method="_on_ShovelFix_pressed"]
+[connection signal="pressed" from="InGameGUI/Shop/PanelContainer/VBoxContainer/Upgrade/Buy" to="." method="_on_ShovelDurability_pressed"]
+[connection signal="pressed" from="InGameGUI/Shop/PanelContainer/VBoxContainer/Range/Buy" to="." method="_on_ShovelRange_pressed"]
+[connection signal="pressed" from="InGameGUI/Shop/PanelContainer/VBoxContainer/Exit" to="." method="closeShop"]
